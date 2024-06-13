@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+    <div class="container mt-5 mb-5">
+        <div class="row mt-3">
+            <div class="col-md-5 text-center mb-3">
+                <div class="card">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="img-fluid mt-2 mb-2 mx-auto" style="width: 400px; height: 400px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'items/img/no-image.jpg' %}" class="img-fluid mt-2 mb-2 mx-auto" style="width: 400px; height: 400px; object-fit: cover;">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-7 mb-5">
+                <div class="card p-3">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="mt-2">{{ item.name }}</h3>
+                        {% if item in request.user.wishlist.items.all %}
+                            <a href="{% url "items:wishlist_remove" item.pk %}" class="btn fs-4 text-danger"><i class="bi bi-heart-fill"></i></a>
+                        {% else %}
+                            <a href="{% url "items:wishlist_add" item.pk %}" class="btn fs-4 text-danger"><i class="bi bi-heart"></i></a>
+                        {% endif %}
+                    </div>
+                    <p style="text-align: justify;">{{ item.description }}</p>
+                    {% if item.availability %}
+                    <p><b>Disponible:</b> <i class="bi bi-check-circle" style="color:green"></i></a></p>
+                    {% else %}
+                    <p><b>Disponible:</b> <i class="bi bi-x-circle" style="color:red;"></i></a></p>
+                    {% endif %}
+                    <p><b>Vendido por:</b> <a href="{% url "profiles:detail" item.created_by %}">{{ item.created_by }}</a></p>
+                    <p> <b>Ubicación: </b>{% if item.created_by.profile.city %} {{ item.created_by.profile.city }}, {% endif %}{{ item.created_by.profile.get_state_display }}</p>
+                    <p><b>Precio:</b> <span class="price"><b>{{ item.price }} $</b></span></p>
+                    <p><b>Categoría:</b> <a href="{% url "items:category" item.category.pk item.category.name %}">{{ item.category }}</a></p>
+                    <p><b>Publicado:</b> {{ item.created_at|date:"SHORT_DATE_FORMAT" }}</p>
+                    {% if request.user == item.created_by %}
+                        <a href="{% url "items:update" item.id %}" class="btn btn-custom btn-sm btn-block mb-2">Editar</a>
+                        <a href="{% url "items:delete" item.id %}" class="btn btn-custom btn-sm btn-block mb-2">Eliminar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

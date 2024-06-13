@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{profile.user}}{% endblock %}
+{% block content %}
+<main role="main">
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-9 mx-auto mb-5">
+                <div class="row">
+                    <!-- Avatar -->
+                    <div class="col-md-2 mb-3 text-center">
+                        {% if profile.avatar %}
+                            <img src="{{profile.avatar.url}}" class="img-fluid">
+                        {% else %}
+                            <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
+                        {% endif %}
+                        {% if request.user != profile.user %}
+                            <a href="{% url "messenger:start" profile.user %}" class="btn btn-custom btn-sm btn-block mt-3">Enviar mensaje</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-10">
+                        <h3 class="mb-3">{{profile.user}}</h3>
+                        {% if profile.bio %}<p style="text-align: justify;">{{ profile.bio|linebreaksbr }}</p>{% endif %}
+                        {% if profile.phone %}<p> <b>Número de contacto: </b>{{ profile.phone }}</p>{% endif %}
+                        {% if profile.user.email %}<p> <b>Email de contacto: </b>{{ profile.user.email }}</p>{% endif %}
+                        {% if profile.state or profile.city %}<p> <b>Ubicación: </b>{{ profile.city }}, {{ profile.get_state_display }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center mt-5">
+            <h2>Productos de {{ profile.user }}</h2>
+            {% for item in profile.user.items.all %}
+                <div class="col-md-4 text-center">
+                    <div class="card m-3 mx-auto" style="width: 18rem;">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="img-fluid mt-1 mx-auto" style="width: 250px; height: 250px; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'items/img/no-image.jpg' %}" class="img-fluid mt-1 mx-auto" style="width: 250px; height: 250px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name |truncatechars:"16"}}</h5>
+                            <h6>{{ item.price }} $</h6>
+                            <a href="{% url "items:detail" item.pk %}" class="btn btn-custom">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>                
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

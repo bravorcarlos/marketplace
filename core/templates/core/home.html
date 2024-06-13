@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="text-center mt-5">
+        <img src="{% static "core/img/logo-big.png" %}" alt="" class="img-fluid">
+        <p class="lead display-6 mt-5">Aki compras y vendes lo que quieras o necesites</p>
+        {% if not user.is_authenticated %}
+        <a class="btn btn-custom btn-lg m-2" href="{% url "login" %}">Acceder</a>
+        <a class="btn btn-custom btn-lg" href="{% url "signup" %}">Registro</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

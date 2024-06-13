@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Perfil{% endblock %}
+{% block content %}
+<style>.errorlist{color:red;}</style>
+<main role="main">
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-9 mx-auto mb-5">
+                {% if 'complete_profile' in request.GET %}
+                    <div class="alert alert-warning  alert-dismissible fade show" role="alert">
+                        Debes completar tu perfil para poder publicar productos a la venta
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% elif 'ok' in request.GET %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Perfil actualizado
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>                  
+                {% endif %}
+                <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                        <!-- Previa del avatar -->
+                        <div class="col-md-2">
+                            {% if request.user.profile.avatar %}
+                                <img src="{{request.user.profile.avatar.url}}" class="img-fluid">
+                                <p class="mt-1">¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear" /></p>
+                            {% else %}
+                                <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
+                            {% endif %}
+                        </div>
+                        <!-- Formulario -->
+                        <div class="col-md-10">
+                            <h3>{{ request.user.username }}</h3>
+                            <div class="mt-3">
+                                <label for="id_avatar" class="form-label">Selecciona o cambia tu imágen de perfil</label>
+                                <input type="file" name="image" class="form-control" id="id_avatar">
+                            </div>
+                            {{ form.bio }}
+                            {{ form.phone }}
+                            {{ form.state }}
+                            {{ form.city }}
+                            <input type="email" value="{{ request.user.email }}" class="form-control mt-3" readonly>
+                            <p class="mt-3">Si deseas cambiar tu email, haz click <a href="{% url "profile_email" %}">aquí</a></p>
+                            <p class="mt-3">Si deseas cambiar tu contraseña, haz click <a href="{% url "password_change" %}">aquí</a></p>
+                            <input type="submit" class="btn btn-custom btn-block mt-3" value="Actualizar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row text-center">
+            <h2>Mis productos</h2>
+            {% for item in request.user.items.all %}
+                <div class="col-md-4 text-center">
+                    <div class="card m-3 mx-auto" style="width: 18rem;">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="img-fluid mt-1 mx-auto" style="width: 250px; height: 250px; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'items/img/no-image.jpg' %}" class="img-fluid mt-1 mx-auto" style="width: 250px; height: 250px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name |truncatechars:"16"}}</h5>
+                            <h6 class="price">{{ item.price }} $</h6>
+                            <a href="{% url "items:detail" item.pk %}" class="btn btn-custom">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col">
+                    <p class="mt-4 fs-3 mb-3">No tienes productos publicados</p>
+                    <a class="btn btn-custom btn-lg mb-5" href="{% url "items:create" %}">Vender</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

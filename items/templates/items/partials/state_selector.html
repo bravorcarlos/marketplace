@@ -1,0 +1,32 @@
+<div class="dropdown">
+    <a class="btn btn-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Filtrar por ubicación
+    </a>
+  
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'items:state' 'AN' %}?search={{ request.GET.search }}">Anzoátegui</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'AM' %}?search={{ request.GET.search }}">Amazonas</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'AP' %}?search={{ request.GET.search }}">Apure</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'AR' %}?search={{ request.GET.search }}">Aragua</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'BA' %}?search={{ request.GET.search }}">Barinas</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'BO' %}?search={{ request.GET.search }}">Bolívar</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'CA' %}?search={{ request.GET.search }}">Carabobo</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'CO' %}?search={{ request.GET.search }}">Cojedes</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'DA' %}?search={{ request.GET.search }}">Delta Amacuro</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'DI' %}?search={{ request.GET.search }}">Distrito Capital</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'FA' %}?search={{ request.GET.search }}">Falcón</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'GU' %}?search={{ request.GET.search }}">Guárico</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'LA' %}?search={{ request.GET.search }}">Lara</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'ME' %}?search={{ request.GET.search }}">Mérida</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'MI' %}?search={{ request.GET.search }}">Miranda</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'MO' %}?search={{ request.GET.search }}">Monagas</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'NE' %}?search={{ request.GET.search }}">Nueva Esparta</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'PO' %}?search={{ request.GET.search }}">Portuguesa</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'SU' %}?search={{ request.GET.search }}">Sucre</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'TA' %}?search={{ request.GET.search }}">Táchira</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'TR' %}?search={{ request.GET.search }}">Trujillo</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'VA' %}?search={{ request.GET.search }}">Vargas</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'YA' %}?search={{ request.GET.search }}">Yaracuy</a></li>
+      <li><a class="dropdown-item" href="{% url 'items:state' 'ZU' %}?search={{ request.GET.search }}">Zulia</a></li>
+    </ul>
+</div>

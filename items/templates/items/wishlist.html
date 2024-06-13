@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Lista de deseos{% endblock %}
+{% block content %}
+    <div class="container mt-5 mb-5 text-center">
+        <div class="row">
+            <h2>Lista de deseos</h2>
+            {% for item in request.user.wishlist.items.all %}
+                <div class="col-md-4 text-center mt-3">
+                    <div class="card m-3 mx-auto" style="width: 18rem;">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="img-fluid mt-1 mx-auto" style="width: 250px; height: 250px; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'items/img/no-image.jpg' %}" class="img-fluid mt-1 mx-auto" style="width: 250px; height: 250px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name |truncatechars:"16"}}</h5>
+                            <h6 class="price">{{ item.price }} $</h6>
+                            <a href="{% url "items:detail" item.pk %}" class="btn btn-custom">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="mt-4 fs-3">Tu lista de deseos está vacía</p>                
+            {% endfor %}
+        </div>
+        {% include "items/partials/paginator.html" %}
+    </div>
+{% endblock %}
