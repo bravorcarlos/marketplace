@@ -88,12 +88,9 @@ WSGI_APPLICATION = 'marketplace.wsgi.application'
 
 # Database documentation https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgres://akimarketplace_user:9VPHdosw7uFYoJpA2Jk28zz4koKFYe8F@dpg-cpljdvuehbks73c61ajg-a/akimarketplace',
-        conn_max_age=600
-    )
+    'default': dj_database_url.config(default='postgres://akimarketplace_user:9VPHdosw7uFYoJpA2Jk28zz4koKFYe8F@dpg-cpljdvuehbks73c61ajg-a/akimarketplace'),
 }
 
 # Password validation
