@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'marketplace.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost/postgres',
+        default='postgres://akimarketplace_user:9VPHdosw7uFYoJpA2Jk28zz4koKFYe8F@dpg-cpljdvuehbks73c61ajg-a/akimarketplace',
         conn_max_age=600
     )
 }
