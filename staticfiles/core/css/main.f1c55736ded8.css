@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f1a804;
+    bottom: 0;
+} 
+
+.btn-custom {
+    background-color: #f1a804;
+    border: none;
+    color: black;
+}
+
+.btn-custom:hover {
+    background-color: #d18b03;
+}
+
+.btn-logout {
+    background-color: white;
+}
+
+.navbar {
+    box-shadow: 0px 0.05px 3px #c8c8c8;
+}
+
+.navbar ul li {
+    color: black;
+    font-weight: 800;
+}
+
+.nav-link {
+    color: black;
+}
+
+.dropdown-menu {
+    max-height: 100px; /* Altura máxima deseada */
+    overflow-y: scroll;
+}
+
+.price {
+    color: #f1a804;
+}
