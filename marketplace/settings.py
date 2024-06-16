@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'marketplace.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://akimarketplace_user:9VPHdosw7uFYoJpA2Jk28zz4koKFYe8F@dpg-cpljdvuehbks73c61ajg-a/akimarketplace'),
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
 }
 
 # Password validation
