@@ -91,8 +91,9 @@ WSGI_APPLICATION = 'marketplace.wsgi.application'
 # Database documentation https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
+DATABASE_URL = os.environ.get('DATABASE_URL')  # Obtener la URL de la base de datos del entorno
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL')),
+    'default': dj_database_url.parse(DATABASE_URL)
 }
 
 # Password validation

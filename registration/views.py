@@ -6,7 +6,6 @@ from django import forms
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-from django import forms
 
 # Create your views here.
 class SignUpView(CreateView):
